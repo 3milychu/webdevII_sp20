@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filter and display data based on user input</title>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+
+<div id="filters">
+	<div id="upcoming">Upcoming</div>
+	<div id="past">Past</div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+// declare variables
+let filter1 = document.querySelector('#upcoming')
+	filter2 = document.querySelector('#past')
+	
+// Load data
+d3.csv('data.csv')
+	.then(function(data){
+		console.log(data)
+		// run functions passing data here
+		filter1.onclick=function() {
+			updateData(data,'upcoming')
+		}
+		filter2.onclick=function() {
+			updateData(data,'past')
+		}
+	})
+	.catch(function(error){
+		// handle error
+		console.log(error)
+	})
+
+// Function to filter data  when filter is pressed
+function updateData(data, searchterm){
+	data = data.filter(function(d){
+		return d.display.toLowerCase().includes(searchterm)
+	})
+	console.log(data) 
+}
+
+
+</script>
+
+</html>
