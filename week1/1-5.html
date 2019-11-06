@@ -4,6 +4,41 @@
 	<title>Filter and display data based on user input</title>
 	<script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
+
+<style type="text/css">
+	body {
+		top:0;
+		left:0;
+		width:100%;
+		font-family:Helvetica-Neue, sans-serif;
+		font-weight:200;
+	}
+	#filters {
+		width:50%;
+		margin: 0 auto;
+	}
+	#filters div {
+		width:20%;
+		padding:5%;
+		background-color:#F2F2F2;
+		margin:2%;
+		cursor:pointer;
+		display:inline-block;
+		text-align:center;
+	}
+	#filters div:hover {
+		background-color:#CCCCCC;
+		font-style:bolder;
+	}
+	@media screen and (max-width:767px){
+		#filters div {
+			width:100%;
+			padding:5%;
+			display:block;
+		}
+	}
+</style>
+
 <body>
 
 <div id="filters">

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filter and display data based on user input</title>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+
+<style type="text/css">
+	body {
+		top:0;
+		left:0;
+		width:100%;
+		font-family:Helvetica-Neue, sans-serif;
+		font-weight:200;
+	}
+	#filters {
+		width:50%;
+		margin: 0 auto;
+	}
+	#filters div {
+		width:25%;
+		padding:5%;
+	/*	background-color:#F2F2F2;*/
+		margin:2%;
+		cursor:pointer;
+		display:inline-block;
+		text-align:center;
+
+	}
+	#filters div:hover {
+		border-bottom:0.02em solid #1d1d1d;
+		font-style:bolder;
+	}
+	#upcoming:active {
+		color:red;
+	}
+	#gallery {
+		width:90%;
+		margin: 0 auto;
+	}
+	.card {
+		display:inline-block;
+		text-align:center;
+		background-color:white;
+		box-shadow:0em 0em 0.3em #CCCCCC;
+		border-radius:0.2em;
+		width:24%;
+		padding:10% 2%;
+		margin:2.5%;
+		height:15vh;
+		vertical-align:top;
+	}
+	.event {
+		font-size:2em;
+		font-weight:900;
+		letter-spacing:-0.02em;
+	}
+	@media screen and (max-width:767px){
+		.card {
+			width:88%;
+			display:block;
+		}
+		.event {
+			padding-top:5%;
+		}
+	}
+</style>
+
+<body>
+
+<!-- filters -->
+<div id="filters">
+	<div id="upcoming">Upcoming</div>
+	<div id="past">Past</div>
+</div>
+<!-- gallery -->
+<div id="gallery"></div>
+
+</body>
+
+<script type="text/javascript">
+// declare variables
+let filter1 = document.querySelector('#upcoming')
+	filter2 = document.querySelector('#past')
+	gallery = document.querySelector('#gallery')
+	
+// Load data
+d3.csv('data.csv')
+	.then(function(data){
+		console.log(data)
+		displayData(data)
+		// run functions passing data here
+		filter1.onclick=function() {
+			updateData(data,'upcoming')
+			filter1.style.fontWeight=900;
+			filter2.style.fontWeight=400;
+		}
+		filter2.onclick=function() {
+			updateData(data,'past')
+			filter1.style.fontWeight=400;
+			filter2.style.fontWeight=900;
+		}
+	})
+	.catch(function(error){
+		// handle error
+		console.log(error)
+	})
+
+// Function to filter data  when filter is pressed
+function updateData(data, searchterm){
+	data = data.filter(function(d){
+		return d.display.toLowerCase().includes(searchterm)
+	})
+	displayData(data)
+}
+
+// Function to display data passed
+function displayData(data){
+	clear('gallery')
+	for(i=0;i<data.length;i++){
+		card = document.createElement('div')
+		card.setAttribute('class','card')
+		title = document.createElement('div')
+		title.setAttribute('class','event')
+		title.innerHTML=data[i]['event_name']
+		card.appendChild(title)
+		gallery.appendChild(card)
+	}
+}
+// Function to clear gallery
+function clear(target){
+	target = document.querySelector('#'+target)
+	target.innerHTML=""
+}
+
+// Function to update filters styling
+
+
+
+</script>
+
+</html>
