@@ -4,10 +4,10 @@
 
 ## Syllabus
 ### Week 1: Designing Single Page Applications (SPAs)
-[1-3 Basics review](https://3milychu.github.io/webdevII_sp20/week1/1-3.html)
-[1-5 Filter and display data based on user input](https://3milychu.github.io/webdevII_sp20/week1/1-6.html)
-[1-6 Filter and display data based on user input](https://3milychu.github.io/webdevII_sp20/week1/1-6.html)
-[1-7 Adding simple microanimation to behaviors](https://3milychu.github.io/webdevII_sp20/week1/1-7.html)
+[1-3 Basics review](https://3milychu.github.io/webdevII_sp20/week1/1-3.html)<br>
+[1-5 Filter and display data based on user input](https://3milychu.github.io/webdevII_sp20/week1/1-6.html)<br>
+[1-6 Filter and display data based on user input](https://3milychu.github.io/webdevII_sp20/week1/1-6.html)<br>
+[1-7 Adding simple microanimation to behaviors](https://3milychu.github.io/webdevII_sp20/week1/1-7.html)<br>
 
 ### Week 2: Responsive Design
 ### Week 3: CSS Grid
