@@ -14,6 +14,8 @@
 [2-4 Calculating aspect ratios](https://3milychu.github.io/webdevII_sp20/week2/2-4.html)<br>
 
 ### Week 3: CSS Grid
+[3-2 Positioning](https://3milychu.github.io/webdevII_sp20/week3/3-2.html)<br>
+
 ### Week 4: CSS Selectors & Pseudo-selectors
 ### Week 5: CSS Animations
 ### Week 6: Javascript events
