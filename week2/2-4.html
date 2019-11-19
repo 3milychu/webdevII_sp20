@@ -62,7 +62,22 @@
 
 </body>
 <script type="text/javascript">
-fixAspectRatio('#holder2')
+
+var imgs = document.images,
+    len = imgs.length,
+    counter = 0;
+
+[].forEach.call( imgs, function( img ) {
+    img.addEventListener( 'load', incrementCounter, false );
+} );
+
+function incrementCounter() {
+    counter++;
+    if ( counter === len ) {
+       fixAspectRatio('#holder2')
+    }
+}
+
 window.onresize=function() {
 	fixAspectRatio('#holder2')
 }
@@ -73,13 +88,15 @@ function fixAspectRatio(item){
 	caption = item.querySelector('.caption')
 	height1= getheight(img)
 	height2 = getheight(caption)
-	console.log(height1+height2)
-	item.style.height=(height1+height2)+"px"
-	console.log(item.clientHeight)
+	setheight(item, height1, height2)
 }
 
 function getheight(item){
 	return item.clientHeight
+}
+
+function setheight(item, height1, height2){
+	item.style.height=(height1+height2)+"px"
 }
 
 </script>
