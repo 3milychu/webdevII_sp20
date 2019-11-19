@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculating aspect units</title>
+	<meta name="viewport" content="width=device-width">
+</head>
+<style type="text/css">
+	body, html {
+		font-family:"Helvetica-Neue", sans-serif;
+	}
+	.holder {
+		overflow:hidden;
+		position:relative;
+		box-shadow:0em 0em 0.5em 0.05em #CCCCCC;
+		border-radius:0.2em;
+		margin:auto;
+	}
+	#holder1{
+		margin:auto;
+		width:50%;
+		height:40vh;
+		background-color:#F2F2F2;
+	}
+	#holder2{
+		width:50%;
+	}
+	img {
+		width:100%;
+	}
+	.caption {
+		position:absolute;
+		bottom:0;
+		background-color:white;
+		padding:5%;
+		width:90%;
+		color:#1d1d1d;
+	}
+	em {
+		font-style:normal;
+		font-weight:600;
+	}
+</style>
+<body>
+
+<h2>I don't look right when stretched!</h2>
+<div class="holder" id="holder1">
+	<img src="https://images.pexels.com/photos/50577/hedgehog-animal-baby-cute-50577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+	<div class="caption">
+		<em>Pete the Hedgehog</em>
+		<p>A spiky small creature who is mostly friendly</p>
+	</div>
+</div>
+
+<h2>Much better - just try stretching me</h2>
+<div class="holder" id="holder2">
+	<img src="https://images.pexels.com/photos/50577/hedgehog-animal-baby-cute-50577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+	<div class="caption">
+		<em>Pete the Hedgehog</em>
+		<p>A spiky small creature who is mostly friendly</p>
+	</div>
+</div>
+
+</body>
+<script type="text/javascript">
+fixAspectRatio('#holder2')
+window.onresize=function() {
+	fixAspectRatio('#holder2')
+}
+
+function fixAspectRatio(item){
+	item = document.querySelector(item)
+	img = item.querySelector('img')
+	caption = item.querySelector('.caption')
+	height1= getheight(img)
+	height2 = getheight(caption)
+	console.log(height1+height2)
+	item.style.height=(height1+height2)+"px"
+	console.log(item.clientHeight)
+}
+
+function getheight(item){
+	return item.clientHeight
+}
+
+</script>
+</html>

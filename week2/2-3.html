@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Responsive layouts</title>
+	<meta name="viewport" content="width=device-width">
+</head>
+<style type="text/css">
+body, html {
+	font-family:'Helvetica Neue', sans-serif;
+}
+.flex {
+	font-family:'Helvetica Neue', sans-serif;
+	background-color:#F2F2F2;
+	display:flex;
+	flex-wrap:wrap;
+}
+.flex > div {
+	text-align:center;
+	background-color:#1d1d1d;
+	color:white;
+	margin:2%;
+	padding:3%;
+	width:5em;
+	height:5em;
+}
+
+.parent {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.aligner {
+	max-width:80%;
+	text-align:center;
+}
+.aligner .flex {
+	width:100%;
+	justify-content:center;
+}
+@media screen and (max-width:767px){
+
+}
+</style>
+<body>
+<h1>Resize this page</h1>
+
+<h2>Flexbox</h2>
+<div class="flex">
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+	<div>6</div>
+	<div>7</div>
+	<div>8</div>
+	<div>9</div>
+	<div>10</div>
+	<div>11</div>
+</div>
+
+<h2>Flexbox with aligner</h2>
+<div class="parent"'>
+	<div class="aligner">
+		<div class="flex">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>6</div>
+			<div>7</div>
+			<div>8</div>
+			<div>9</div>
+			<div>10</div>
+			<div>11</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

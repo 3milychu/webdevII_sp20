@@ -3,10 +3,13 @@
 <head>
 	<title>Adding simple microanimation to behaviors</title>
 	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<meta name="viewport" content="width=device-width">
 </head>
 
 <style type="text/css">
 	body {
+		margin:0;
+		padding:0;
 		top:0;
 		left:0;
 		width:100%;
@@ -51,23 +54,34 @@
 		height:15vh;
 		vertical-align:top;
 		cursor:pointer;
+		transition:0.5s all ease-in-out;
 		/*add animation*/
-		animation: fadeIn 1s ease-in-out;
+		animation: fadeIn 0.1s ease-in-out;
 	}
 	.event {
 		font-size:2em;
 		font-weight:900;
 		letter-spacing:-0.02em;
 	}
+	.buttonholder {
+		position:fixed;
+		bottom:0;
+		width: 98%;
+	    text-align: center;
+	    background-color: white;
+	    padding: 2%;
+	    animation: fadeIn 0.5s ease-in-out;
+	    box-shadow:0em -0.05em .8em #CCCCCC;
+	}
 	.button {
-		width: 80%;
+		width: 94%;
 	    text-align: center;
 	    background-color: #F2F2F2;
-	    padding: 5%;
-	    margin: 5%;
+	    padding: 2%;
 	    border-radius: 0.2em;
 	    font-weight: 200;
 	    font-size: 1em;
+	    cursor:pointer;
 	}
 	.button:hover {
 		background-color:#CCCCCC;
@@ -83,6 +97,7 @@
 		display:flex;
 		align-items:center;
 		justify-content: center;
+		z-index:10;
 	}
 	.aligner {
 		max-width:50%;
@@ -164,6 +179,14 @@
 		}
 		.event {
 			padding-top:5%;
+		}
+		.buttonholder {
+			padding:5%;
+			width:100%;
+		}
+		.button {
+			padding:5%;
+			width:80%;
 		}
 	}
 </style>
@@ -275,11 +298,14 @@ function submit(items){
 	console.log(cart)
 	if(cart.length>0){
 		if (document.querySelector('#submit')==undefined){
+			buttonholder = document.createElement('div')
+			buttonholder.setAttribute('class','buttonholder')
+			buttonholder.setAttribute('id','submit')
 			button = document.createElement('div')
 			button.setAttribute('class','button')
-			button.setAttribute('id','submit')
 			button.innerHTML="Submit"
-			body.appendChild(button)
+			buttonholder.appendChild(button)
+			body.appendChild(buttonholder)
 		}
 		submitbutton = document.querySelector('#submit')
 		submitbutton.onclick=function() {
@@ -302,7 +328,7 @@ function submit(items){
 
 		}
 	} else {
-		submitbutton = document.querySelector('#submit')
+		submitbutton = document.querySelector('.buttonholder')
 		submitbutton.remove()
 	}
 }

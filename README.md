@@ -10,6 +10,9 @@
 [1-7 Adding simple microanimation to behaviors](https://3milychu.github.io/webdevII_sp20/week1/1-7.html)<br>
 
 ### Week 2: Responsive Design
+[2-3 Responsive layouts](https://3milychu.github.io/webdevII_sp20/week2/2-3.html)<br>
+[2-4 Calculating aspect ratios](https://3milychu.github.io/webdevII_sp20/week2/2-4.html)<br>
+
 ### Week 3: CSS Grid
 ### Week 4: CSS Selectors & Pseudo-selectors
 ### Week 5: CSS Animations
