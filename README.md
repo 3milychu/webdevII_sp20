@@ -21,7 +21,7 @@
 ### Week 4: CSS Selectors & Pseudo-selectors
 [4-3 Create and style a search box](https://3milychu.github.io/webdevII_sp20/week4/4-3/template.html)<br>
 [4-4 Shadow DOM](https://3milychu.github.io/webdevII_sp20/week4/4-4.html)<br>
-[4-6 Project template](https://3milychu.github.io/webdevII_sp20/week4/4-4.html)<br>
+[4-6 Project template](https://3milychu.github.io/webdevII_sp20/week4/4-3/template.html)<br>
 
 ### Week 5: CSS Animations
 ### Week 6: Javascript events
