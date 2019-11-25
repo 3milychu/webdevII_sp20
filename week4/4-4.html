@@ -48,15 +48,22 @@
 <h1>General form</h1>
 <!-- other input-->
 <form>
-	<input type="text"  name="search" placeholder="Hi I'm an input" onClick="this.setSelectionRange(0, this.value.length)">
+	<input type="text"  name="search" placeholder="Hi I'm a document-level input" onClick="this.setSelectionRange(0, this.value.length)">
 </form>
 
 <br><br>
 
 <h1>Search box form</h1>
-<p><em>Inspect me and my shadow root</em></p>
+<p><em>Inspect the custom element 'search-box' and its shadow root. Document-level css does not influence local css in shadow root and local styling does not leak out.</em></p>
 <!-- contained search box -->
 <search-box>
+</search-box>
+
+<h1>Search box slot</h1>
+<p><em>Modifying the custom element slot updates the template's default submit button icon</em></p>
+<!-- contained search box -->
+<search-box>
+	<i class="material-icons" slot="search-icon">add_shopping_cart</i>
 </search-box>
 
 <br><br>
@@ -81,31 +88,40 @@ customElements.define('search-box', class extends HTMLElement{
 			display:block;
 			contain:content;
 		}
+		form {
+			padding:1%;
+			display:flex;
+			align-items:center;
+			justify-items:center;
+			background-color:white;
+			width:80%;
+			margin: 5% 10% 2% 8%;
+			border:0.05em solid #1d1d1d;
+			border-radius:0.2em;
+			transition:0.5s ease-in-out;
+		}
+		input {
+			width:90%;
+			margin-top:0%;
+			padding:2%;
+			border: 1em solid #1d1d1d;
+		    border-radius: 1em; 
+		    border-style:none;
+		}
+		button {
+			float:right;
+			padding:0%;
+			margin-top:0%;
+			font-size:2em;
+			background-color:transparent;
+			border:none;
+		}
 		</style>
 		<slot></slot>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<form style="padding:1%;
-		display:flex;
-		align-items:center;
-		justify-items:center;
-		background-color:white;
-		width:80%;
-		margin: 5% 10% 2% 8%;
-		border:0.05em solid #1d1d1d;
-		border-radius:0.2em;
-		transition:0.5s ease-in-out;">
-		<input style="width:90%;
-		margin-top:0%;
-		padding:2%;
-		border: 1em solid #1d1d1d;
-	    border-radius: 1em; 
-	    border-style:none;" type="text" name="search" placeholder="Search events by title" onClick="this.setSelectionRange(0, this.value.length)">
-		<button style="float:right;
-		padding:0%;
-		margin-top:0%;
-		font-size:2em;
-		background-color:transparent;
-		border:none;"><i class="material-icons">search</i></button>
+		<form>
+		<input type="text" name="search" placeholder="Search events by title" onClick="this.setSelectionRange(0, this.value.length)">
+		<button><slot name="search-icon"><i class="material-icons" slot="search-icon">search</i></slot></button>
 		</form>
 		`
 	}
