@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Custom elements with Shadow DOM</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<meta name="viewport" content="width=device-width">
+</head>
+<style type="text/css">
+	body, html {
+		font-family: 'Helvetica Neue', sans-serif;
+	}
+	/*generic form styling*/
+	form {
+		border-bottom:0.5em solid red;
+	}
+	input {
+		font-family:Open Sans;
+		font-weight:400;
+		font-size:1em;
+		background-color:transparent;
+		width:50%;
+		margin-top:2%;
+		padding:2%;
+	    border-radius: 1em; 
+	    border-style:none;
+	}
+	input:focus {
+		outline:none;
+	}
+	button {
+		color:#1d1d1d;
+		float:right;
+		vertical-align:text-bottom;
+		margin-right:4%;
+		margin-top:4%;
+		font-size:1em;
+		border:none;
+		background-color:transparent;
+	}
+	button i{
+		font-size:1.5em;
+		color:#CCCCCC;
+	}
+	/*search box form*/
+</style>
+<body>
+
+<h1>General form</h1>
+<!-- other input-->
+<form>
+	<input type="text"  name="search" placeholder="Hi I'm an input" onClick="this.setSelectionRange(0, this.value.length)">
+</form>
+
+<br><br>
+
+<h1>Search box form</h1>
+<p><em>Inspect me and my shadow root</em></p>
+<!-- contained search box -->
+<search-box>
+</search-box>
+
+<br><br>
+
+<h1 style="display:inline-block;">Add search box component easily</h1><button id='add' style="float:none;display:inline-block;margin-left:5%;background-color:#F2F2F2;cursor:pointer;padding:1%;">Add</button>
+<p>The code: <em>target = document.querySelector('#target'); searchbox = document.createElement('search-box'); target.appendChild(searchbox)</em></p>
+<!-- add search boxes here -->
+
+<div id="target"></div>
+
+</body>
+<script type="text/javascript">
+
+//create shadow dom elements
+
+customElements.define('search-box', class extends HTMLElement{
+	constructor() {
+		super();
+		this.attachShadow({mode:'open'}).innerHTML=`
+		<style>
+		:host {
+			display:block;
+			contain:content;
+		}
+		</style>
+		<slot></slot>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<form style="padding:1%;
+		display:flex;
+		align-items:center;
+		justify-items:center;
+		background-color:white;
+		width:80%;
+		margin: 5% 10% 2% 8%;
+		border:0.05em solid #1d1d1d;
+		border-radius:0.2em;
+		transition:0.5s ease-in-out;">
+		<input style="width:90%;
+		margin-top:0%;
+		padding:2%;
+		border: 1em solid #1d1d1d;
+	    border-radius: 1em; 
+	    border-style:none;" type="text" name="search" placeholder="Search events by title" onClick="this.setSelectionRange(0, this.value.length)">
+		<button style="float:right;
+		padding:0%;
+		margin-top:0%;
+		font-size:2em;
+		background-color:transparent;
+		border:none;"><i class="material-icons">search</i></button>
+		</form>
+		`
+	}
+})
+
+// Add another search box easily
+target = document.querySelector('#target')
+add = document.querySelector('#add')
+add.onclick=function() {
+	searchbox = document.createElement('search-box')
+	target.appendChild(searchbox)
+	window.scrollTo({
+		top:window.innerHeight,
+		behavior: 'smooth'
+
+	})
+}
+
+</script>
+</html>
