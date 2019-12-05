@@ -23,8 +23,14 @@
 [4-4 Shadow DOM](https://3milychu.github.io/webdevII_sp20/week4/4-4.html)<br>
 [4-6 Project template](https://3milychu.github.io/webdevII_sp20/week4/4-3/template.html)<br>
 
-### Week 5: CSS Animations
-### Week 6: Javascript events
+### Week 5: Javascript events
+[5-2 Essential javascript events](https://3milychu.github.io/webdevII_sp20/week5/5-2.html)<br>
+[5-3 Designing different views](https://3milychu.github.io/webdevII_sp20/week5/5-3.html)<br>
+
+### Week 6: CSS Animations
+[6-3 Keyframes and cubic-bezier](https://3milychu.github.io/webdevII_sp20/week6/6-3.html)<br>
+[6-4 Dynamic animation](https://3milychu.github.io/webdevII_sp20/week6/6-4.html)<br>
+
 ### Week 7: Svgs and paths
 ### Week 8: Trending styling techniques
 ### Week 9: Summary and presentations

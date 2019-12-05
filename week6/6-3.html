@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>@keyframe and cubic bezier transition examples</title>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<meta name="viewport" content="width=device-width">
+</head>
+<style type="text/css">
+body {
+	font-family: 'Helvetica Neue', sans-serif;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	height:100vh;
+	top:0;
+	left:0;
+	width:100%;
+}
+#examples {
+	max-width:80%;
+}
+.item {
+	width:100%;
+	margin:5%;
+}
+/*typewriter effect from https://css-tricks.com/snippets/css/typewriter-effect/*/
+.typewriter h1 {
+	max-width:100%;
+	overflow: hidden; 
+	border-right: .1em solid grey; 
+	white-space: nowrap; 
+	margin: 0 auto; 
+	animation: 
+	typing 2s steps(25, end),
+	blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: grey; }
+}
+
+</style>
+<body>
+
+<div id='examples'>
+
+	<div class='item'>
+		<div class="typewriter">
+  			<h1>Let's animate!</h1>
+		</div>
+	</div>
+
+</div>
+
+</script>
+</body>
+</html>

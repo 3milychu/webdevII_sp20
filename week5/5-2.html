@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Essential javascript events</title>
+</head>
+<style type="text/css">
+	#element {
+		font-family:'Helvetica-Neue', sans-serif;
+		padding:5%;
+		background-color:#f2f2f2;
+		font-size:1em;
+		cursor:pointer;
+		text-align:center;
+		animation: fadeIn 1s ease-in-out;
+	}
+	@keyframes fadeIn {
+		0% {
+			opacity:0;
+		}
+		100% {
+			opacity:1;
+		}
+	}
+</style>
+<body>
+
+<div id='element'>An element</div>
+
+<select>
+	<option>-select-</option>
+	<option>Refresh</option>
+</select>
+
+</body>
+<script type="text/javascript">
+let element = document.querySelector('#element')
+
+// clicking elements
+element.onclick=function() {
+	console.log('I see you clicked on me')
+}
+
+// mouse entering an element
+element.onmouseover =function() {
+	console.log('You are hovering within my boundaries')
+}
+
+// mouse leaving an element
+element.onmouseout =function() {
+	console.log('The mouse is outside')
+}
+
+// running a function after a certain amount of time (in milliseconds)
+window.setTimeout(function() {
+	console.log("It's been a second")
+},1000)
+
+// running a function every x millseconds
+window.setInterval(function() {
+	console.log('I run every minute')
+},60000)
+
+
+// changing something about an element
+select = document.querySelector('select')
+select.onchange=function() {
+	if(select.value == 'Refresh'){
+		// refreshing the page
+		location.reload()
+	}
+}
+
+</script>
+</html>

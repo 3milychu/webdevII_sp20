@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Designing different views</title>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<meta name="viewport" content="width=device-width">
+</head>
+<style type="text/css">
+	body {
+		display:flex;
+		justify-content:center;
+		align-content:center;
+	}
+	.container {
+		width:90%;
+		text-align:right;
+	}
+	#results {
+		max-width:90%;
+	}
+	.filter {
+		width:2em;
+		height:2em;
+		display:inline-block;
+		cursor:pointer;
+	}
+	.filter:hover {
+		border:0.05em solid black;
+	}
+	.filter img {
+		width:100%;
+	}
+</style>
+<body>
+
+<div class='container'>
+	<div class='container'>
+		<div class='filter' id='list'><img src="list.png"></div>
+		<div class='filter' id='tile'><img src="tile.png"></div>	
+	</div>
+
+	<div id='results'></div>
+</div>
+
+</body>
+<script type="text/javascript">
+
+let list = document.querySelector('#list')
+	tile = document.querySelector('#tile')
+	results = document.querySelector('#results')
+
+d3.csv('data.csv')
+	.then(function(data){
+		tileView(data)
+		list.onclick=function() {
+			clear()
+			listView(data)
+		}
+
+		tile.onclick=function() {
+			clear()
+			tileView(data)
+		}
+
+	})
+	.catch(function(error){
+
+	})
+
+function tileView(data){
+	data.forEach(function(item){
+		name = item['event_name']
+		results.innerHTML += "<event-tile><h1 slot='event-name'>"+ name + "</h1></event-card>"
+	})
+}
+
+function listView(data){
+	data.forEach(function(item){
+		name = item['event_name']
+		results.innerHTML += "<event-list><h1 slot='event-name'>"+ name + "</h1></event-card>"
+	})
+}
+
+function clear() {
+	results.innerHTML=""
+}
+
+customElements.define('event-tile', class extends HTMLElement{
+	constructor() {
+		super();
+		this.attachShadow({mode:'open'}).innerHTML=`
+		<style>
+		:host {
+			display:inline-flex;
+			justify-content:center;
+			align-items:center;
+			text-align:center;
+			contain:content;
+			border:0.1em solid black;
+			width:25%;
+			height:15vh;
+			margin:3%;
+			animation:fadeIn 2s cubic-bezier(0.23, 1, 0.32, 1);
+		}
+		::slotted(h1) {
+			font-size:1em;
+			margin:auto;
+			font-family:'Helvetica-Neue',sans-serif;
+		}
+		@keyframes fadeIn {
+			0%{
+				opacity:0;
+			}
+			100% {
+				opacity:1
+			}
+		}
+		</style>
+		<slot></slot>
+		<slot name="event-name"><h1 slot="event-name">event name</h1></slot>
+		`
+		}
+	})
+
+customElements.define('event-list', class extends HTMLElement{
+	constructor() {
+		super();
+		this.attachShadow({mode:'open'}).innerHTML=`
+		<style>
+		:host {
+			display:flex;
+			justify-content:center;
+			align-content:center;
+			background-color:#f2f2f2;
+			width:100%;
+			height:10vh;
+			margin:3%;
+			animation:fadeIn 2s cubic-bezier(0.23, 1, 0.32, 1);
+		}
+		::slotted(h1) {
+			font-size:1em;
+			margin:auto;
+			font-family:'Helvetica-Neue',sans-serif;
+		}
+		@keyframes fadeIn {
+			0%{
+				opacity:0;
+			}
+			100% {
+				opacity:1
+			}
+		}
+		</style>
+		<slot></slot>
+		<slot name="event-name"><h1 slot="event-name">event name</h1></slot>
+		`
+		}
+	})
+	
+</script>
+</html>
