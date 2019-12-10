@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>d3 vs. p5</title>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
+</head>
+<style type="text/css">
+	svg {
+		position:absolute;
+		bottom:0%;
+	}
+	circle {
+		fill: none;
+		stroke:black;
+	}
+</style>
+<body>
+<svg></svg>
+</body>
+<script type="text/javascript">
+	
+//p5 functions
+let w = window.innerWidth
+	h = window.innerHeight
+
+
+function setup() {
+	createCanvas(w, h/2)
+	frameRate(500);
+	// r=Math.floor(Math.random() * 80) + 0
+	// random_x = Math.floor(Math.random() * w) + 0
+	// x = random_x+r
+	// y = h/4
+	direction = 1
+	speed = 15
+	number_circles=5
+}
+
+function draw() {
+	 // background('white');
+	random_r=Math.floor(Math.random() * 80) + 0
+	random_x = Math.floor(Math.random() * w) + 0
+	random_y = Math.floor(Math.random() * h/2) + 0
+	 // drawing lots of elements
+	noFill()
+	ellipse(random_x,random_y,random_r,random_r)
+	
+	// animation
+	// fill('white');
+	// x = x+speed*direction
+	// if (x>w-r || x<0+r){
+	// 	direction *= -1
+	// }
+	// ellipse(x,y,r,r)
+}
+
+// d3 functions
+svg = d3.select('svg')
+	.attr('width',w)
+	.attr('height',h/2)
+
+// drawing lots of elements
+console.log(window.performance.getEntriesByType("navigation"))
+
+d3_animation = setInterval(function() {
+	d3_r=Math.floor(Math.random() * 80) + 0
+	d3_random_x = Math.floor(Math.random() * w) + 0
+	d3_random_y = Math.floor(Math.random() * h) + 0
+	d3_x = d3_random_x
+	d3_y = d3_random_y
+	svg
+		.append('circle')
+		.attr('cx',d3_x)
+		.attr('cy',d3_y)
+		.attr('r',d3_r)
+},0)
+setTimeout(function() {
+	clearInterval(d3_animation);
+},10000)
+
+setInterval(function() {
+console.log(window.performance.getEntriesByType("navigation"))
+},10000)
+
+</script>
+</html>

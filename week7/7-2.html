@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas vs. SVG</title>
+</head>
+<style type="text/css">
+	body, html {
+		margin: 0;
+		top:0;
+		left:0;
+	}
+	.container {
+		margin:auto;
+		width:70%;
+		height:50vh;
+	}
+	svg {
+		width:100%;
+		height:50vh;
+		background-color:#f2f2f2;
+	}
+</style>
+<body>
+		<!-- canvas = can only draw in me with javascript -->
+		<canvas></canvas>
+
+	<!-- svg = you can draw in me with javascript or html -->
+	<?xml version="1.0" encoding="utf-8"?>
+	<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+	<style type="text/css">
+		.st0{fill:#FFFFFF;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+		.st1{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	</style>
+	<rect x="429.07" y="422.53" width="1220.6" height="93.44"/>
+	<line class="st0" x1="312.27" y1="556.85" x2="1489.06" y2="638.61"/>
+	<circle class="st1" cx="362.12" cy="636.68" r="39.43"/>
+	<path class="st1" d="M395.87,504.69c0,21.78-17.65,39.43-39.43,39.43s-39.43-17.65-39.43-39.43"/>
+	<g>
+		<path class="st1" d="M363.89,440.23c21.43,0,38.85-17.09,39.4-38.39"/>
+	</g>
+	</svg>
+
+
+
+</body>
+<script type="text/javascript">
+
+//drawing in canvas
+let canvas = document.querySelector('canvas')
+
+function setupCanvas() {
+	width = window.innerWidth;
+	height = window.innerHeight;
+	canvas.width=width;
+	canvas.height=height/2;
+}
+
+setupCanvas()
+drawCanvasThings()
+
+window.onresize=function() {
+	setupCanvas()
+	drawCanvasThings()
+}
+
+function drawCanvasThings() {
+// rectangle
+rect = canvas.getContext('2d')
+rect.fillStyle = 'black'
+rect.fillRect(width*.37,height*.20,width/3.5,height/25)
+rect.imageSmoothingEnabled = false;
+
+// line
+line = canvas.getContext('2d')
+line.moveTo(width*.34, height*.27,)
+line.lineTo(width*.62, height *.30)
+line.stroke()
+line.imageSmoothingEnabled = false;
+
+// circle
+circle = canvas.getContext('2d')
+circle.beginPath()
+circle.arc(width*.34, height*.30, 5, 0, 2 * Math.PI)
+circle.stroke()
+circle.imageSmoothingEnabled = false;
+
+// arc
+arc = canvas.getContext('2d')
+arc.beginPath()
+arc.arc(width*.34, height*.20, 5, 0, 0.5 * Math.PI)
+arc.stroke()
+arc.imageSmoothingEnabled = false;
+
+// arc
+arc2 = canvas.getContext('2d')
+arc2.beginPath()
+arc2.arc(width*.34, height*.25, 5, 0, 1 * Math.PI)
+arc2.stroke()
+arc2.imageSmoothingEnabled = false;
+}
+
+// canvas rect
+console.log(rect)
+
+// svg rect
+svg_rect = document.querySelector('rect')
+console.log(svg_rect)
+	
+</script>
+</html>
