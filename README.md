@@ -37,4 +37,8 @@
 [7-4 anime.js](https://3milychu.github.io/webdevII_sp20/week7/7-4.html)<br>
 
 ### Week 8: Trending styling techniques
+[8-2 Blend modes, filters, gradients, layer multiple backgrounds](https://3milychu.github.io/webdevII_sp20/week8/8-2.html)<br>
+[8-3 Lightboxes and notifications, swipe detection](https://3milychu.github.io/webdevII_sp20/week8/8-3.html)<br>
+[8-4 Scrolling events](https://3milychu.github.io/webdevII_sp20/week8/8-4.html)<br>
+
 ### Week 9: Summary and presentations

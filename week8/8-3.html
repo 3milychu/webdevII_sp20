@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lightboxes and notifications</title>
+	<script type="text/javascript" src="js/swiped-events.js"></script>
+	<meta name="viewport" content="width=device-width">
+</head>
+<style type="text/css">
+body {
+	font-family:'Helvetica Neue', sans-serif;
+}
+	#lightbox {
+	display:none;
+	position:fixed;
+	background-color:white;
+	width:100%;
+	height:100vh;
+	opacity:.95;
+	z-index:99;
+}
+#hint {
+	display:none;
+	width:80%;
+	text-align:center;
+	opacity:1;
+	background-color:white;
+	border-radius:0.5em;
+	position:absolute;
+    left:0; 
+    right:0;
+    top:0; 
+    bottom:0;
+    margin:auto;
+    height:fit-content;
+	z-index:100;
+	box-shadow: 0.05em 0.05em 0.5em #CCCCCC;
+	overflow:hidden;
+	animation: moveIn 0.5s ease-in-out;
+}	
+#hint img {
+	width:10%;
+	padding:5% 0%;
+	animation: swipehor 3s infinite ease-in-out;
+}
+#hint h1 {
+	font-size:1.2em;
+	line-height:1.2em;
+	font-weight:600;
+	letter-spacing:0.02em;
+	padding: 5% 0%;
+}
+#hint p {
+	font-size:0.8em;
+	line-height:1.5em;
+	font-weight:400;
+	color:#666666;
+}
+#hint .button {
+	background-color:#fc141b;
+	color:white;
+	font-size:1em;
+	padding:5% 0%;
+	font-weight:700;
+	cursor:pointer!important;
+}
+@keyframes swipehor {
+	0% {margin-left:-30%;}
+	50% {margin-left:40%;}
+	100% {margin-left:-30%;}
+}
+@keyframes moveIn {
+	0% {
+		opacity:0;
+		padding-top:10%;
+		transition:0.5s ease-in-out;
+	};
+	100% {
+		opacity:1
+		padding-top:0%;
+	}
+}
+</style>
+<body>
+
+<!-- Lightbox notification hint -->
+<div id="lightbox"></div>
+<div id="hint">
+	<h1>A little hint</h1>
+	<p>To continue, swipe to the left</p>
+	<img src="assets/swipe.png">
+	<div class="button">Got it</div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+body = document.querySelector('body')
+lightbox=document.querySelector('#lightbox')
+hint=document.querySelector('#hint')
+hint_close=hint.querySelector('.button')
+
+// function to show the hint
+function showHint() {
+	lightbox.style.display="block"
+	hint.style.display="block"
+	hint_close.onclick=function() {
+		console.log("click")
+		lightbox.style.display="none"
+		hint.style.display="none"
+	}
+}
+
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+	window.setTimeout(showHint,10000)
+	}
+
+	document.addEventListener('swiped-right', function(e) {
+		showHint();
+	})
+
+	document.addEventListener('swiped-left', function(e) {
+		body.innerHTML="100 coins for you"
+	})
+
+
+</script>
+</html>
