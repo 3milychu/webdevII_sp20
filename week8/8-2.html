@@ -1,406 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>blend modes, filters, gradients, layering backgrounds</title>
-	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<meta name="viewport" content="width=device-width">
-	<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600&display=swap" rel="stylesheet">
+	<title>blend modes, gradients, layering multiple backgrounds</title>
+	<script type="text/javascript" src='https://d3js.org/d3.v5.min.js'></script>
+	<meta name='viewport' content='width=device-width'>
+	<link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
 </head>
+<style>
+body, html {
+	top:0;
+	width:100%;
+	left:0;
+	margin:0;
+	font-family: 'Baloo', sans-serif;
+	color:#142e4e;
+	display:flex;
+	justify-content:center;
+}
+.button{
+	position:fixed;
+	text-align:center;
+	bottom:25%;
+	margin:auto 0;
+	background-color:white;
+	color:#142e4e;
+	font-size:1.5em;
+	padding:2% 10%;
+	border-radius:0.2em;
+	cursor:pointer;
+	transition:0.25s ease-in-out;
+}
+.button:hover{
+	background-color:#142e4e;
+	color:white;
 
-<style type="text/css">
-	body {
-		margin:0%;
-		top:0;
-		left:0;
-		width:100%;
-		font-family: 'Helvetica Neue', sans-serif;
-		color:#666666;
-		font-weight:200;
-	}
-	#splash {
-		margin:auto;
-		width:100%;
-		height:45vh;
-		mix-blend-mode: multiply;
-		background-image:url(assets/5.png), url(assets/6.png), url(assets/4.png);
-  		background-position:left center, right center, center center;
-  		background-repeat: no-repeat;
-  		background-size: auto 45vh;
-	}
-	.gallery {
-		width:100%;
-		margin: 0 auto;
-		overflow-x: scroll;
-    	white-space: nowrap;
-	}
-	h1 {
-		font-size:1.5em;
-		margin-left:2.5%;
-	}
-	.card {
-		color:white;
-		background: rgb(86,197,249);
-		background: linear-gradient(163deg, rgba(86,197,249,1) 0%, rgba(59,114,204,1) 100%);
-		display:inline-flex;
-		justify-content:center;
-		align-items:center;
-		background-color:white;
-		border-radius:1em;
-		width:15%;
-		padding:5% 2%;
-		margin:2.5%;
-		height:15vh;
-		vertical-align:top;
-		cursor:pointer;
-		transition:0.25s all ease-in-out;
-		/*add animation*/
-		animation: fadeIn 0.1s ease-in-out;
-	}
-	.card:hover {
-		box-shadow: 0em 0em 1em rgb(86,197,249);
-	}
-	.event {
-		font-size:1em;
-		font-weight:900;
-	}
-	.buttonholder {
-		position:fixed;
-		bottom:5%;
-		width: 98%;
-		border-radius:2em;
-	    text-align: center;
-	    background-color: white;
-	    opacity:0.95;
-	    padding: 2%;
-	    animation: fadeIn 0.5s ease-in-out;
-	    box-shadow:0em -0.05em .8em #CCCCCC;
-	    z-index:2;
-
-	}
-	.button {
-		width: 94%;
-	    text-align: center;
-		background: rgb(51,251,7);
-		background: linear-gradient(61deg, rgba(51,251,7,1) 0%, rgba(5,180,23,1) 100%);
-	    padding: 2%;
-	    color:white;
-	    border-radius: 2em;
-	    font-weight: 600;
-	    font-size: 1em;
-	    cursor:pointer;
-	    z-index:3;
-	}
-	.button:hover {
-		box-shadow:	0em 0em 1em rgb(51,251,7);
-		cursor:pointer;
-	}
-	#button_gutter {
-		backdrop-filter: blur(10px);
-		-webkit-filter: url(#svg-blur);
-		position: fixed;
-	    bottom: 0%;
-	    width: 100%;
-	    z-index:1;
-	}
-	.notification {
-		top:0;
-		left:0;
-		position:fixed;
-		width: 100%;
-		height:100vh;
-		background-color:white;
-		display:flex;
-		align-items:center;
-		justify-content: center;
-		z-index:10;
-	}
-	.aligner {
-		max-width:50%;
-		text-align:center;
-	}
-	.aligner svg {
-		margin:auto;
-	}
-	.notification p {
-
-	}
-	iframe {
-		width:100%;
-		margin-bottom:-11%;
-		margin-top:-13%;
-
-	}
-	/*CSS animations*/
-
-	@keyframes fadeIn {
-		0% {
-			opacity:0;
-			margin-top:5%;
-
-		}
-		100% {
-			opacity:1;
-			margin-top:2.5%;
-		}
-	}
-	.checkmark {
-	  width: 56px;
-	  height: 56px;
-	  border-radius: 50%;
-	  display: block;
-	  stroke-width: 2;
-	  stroke: white;
-	  stroke-miterlimit: 10;
-	  box-shadow: inset 0px 0px 0px #15C714;
-	  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
-	}
-
-	.checkmark__circle {
-	  stroke-dasharray: 166;
-	  stroke-dashoffset: 166;
-	  stroke-width: 2;
-	  stroke-miterlimit: 10;
-	  stroke: #15C714;
-	  fill: none;
-	  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-	}
-
-	.checkmark__check {
-	  transform-origin: 50% 50%;
-	  stroke-dasharray: 48;
-	  stroke-dashoffset: 48;
-	  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
-	}
-
-	@keyframes stroke {
-	  100% {
-	    stroke-dashoffset: 0;
-	  }
-	}
-	@keyframes scale {
-	  0%, 100% {
-	    transform: none;
-	  }
-	  50% {
-	    transform: scale3d(1.1, 1.1, 1);
-	  }
-	}
-	@keyframes fill {
-	  100% {
-	    box-shadow: inset 0px 0px 0px 30px #15C714;
-	  }
-	}
-
-	/*Responsive*/
-	@media screen and (max-width:1080px){
-		#splash{
-			background-size: 50% auto;
-		}
-	}
-	@media screen and (min-width:700px) and (max-width:1200px){
-		iframe {
-		    margin-bottom: -10%;
-		    margin-top: -10%;
-		    height:75vh;
-		}
-	}
-	@media screen and (max-width:767px){
-		.card {
-			width:90%;
-			display:block;
-		}
-		.buttonholder {
-			padding:5%;
-			width:100%;
-		}
-		.button {
-			padding:5%;
-			width:80%;
-		}
-		#splash{
-			background-size: 50% auto;
-			margin:auto;
-		}
-	}
-	@media screen and (max-width:700px){
-		iframe {
-		    margin-bottom: -25%;
-		    margin-top: -5%;
-		    height:50vh;
-		}
-
-	}
+}
+.aligner{
+	text-align:center;`
+	max-width:80%;
+}
+.event-card {
+	background: rgb(191,239,252);
+	background: linear-gradient(313deg, rgba(191,239,252,1) 0%, rgba(255,255,255,1) 100%);
+	width:80%;
+	margin:auto;
+	padding:2%;
+	margin-top:5%;
+	border-radius:2em;
+	box-shadow:0em 0em 0.5em #bfeffc;
+}
+.event-card img {
+	width:100%;
+	mix-blend-mode: multiply;
+}
 </style>
-
 <body>
-<!-- Welcome -->
-<iframe style='mix-blend-mode:multiply;' frameBorder=0 scrolling='no' width=1300 height=600 src="../week7/7-4.html"></iframe>
-<div class='gallery' id='welcome'>
-	<div id='splash'></div>
-</div>
-
-<!-- gallery -->
-<h1>Arts & Culture</h1>
-<div class='gallery' id="arts">
-</div>
-
-<h1>Food</h1>
-<div class='gallery' id="food">
-</div>
-
-<h1>Others</h1>
-<div class='gallery' id="others">
-</div>
-
-<svg id="svg-filter">
-  <filter id="svg-blur">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
-  </filter>
-</svg>
+<div class='button' id='start'>Start</div>
 </body>
 
 <script type="text/javascript">
-// declare variables
-let body = document.querySelector('body')
-	splash = document.querySelector('#splash')
-	gallery1 = document.querySelector('#arts')
-	gallery3 = document.querySelector('#food')
-	gallery4 = document.querySelector('#others')
+//global variables
+body = document.querySelector('body')
 
-// Load data
-d3.csv('data.csv')
-	.then(function(data){
-		console.log(data)
-		arts = data.filter(function(d){
-			return d.type=='arts' || d.type=='culture'
-		})
-		food = data.filter(function(d){
-			return d.type=='food'
-		})
-		others = data.filter(function(d){
-			return d.type!='arts' && d.type!='culture' && d.type!='food'
-		})
-		displayData('#arts', arts)
-		displayData('#food', food)
-		displayData('#others', others)
-	})
-	.catch(function(error){
-		// handle error
-		console.log(error)
-	})
+//run functions
+startMessage('Hype Events')
+enter() 
 
-// Function to display data passed
-function displayData(location, data){
-	target = document.querySelector(location)
-	console.log(target)
-	data.forEach(function(item){
-		card = document.createElement('div')
-		card.setAttribute('class','card')
-		card.style.backgroundColor="white"
-		title = document.createElement('div')
-		title.setAttribute('class','event')
-		title.innerHTML=item['event_name']
-		card.appendChild(title)
-		target.appendChild(card)
-	})
-		checkCard()
+// functions
+function startMessage(text_to_display){
+	item = document.createElement('start-screen')
+	item.innerHTML="<h1 slot='message'>"+text_to_display+"</h1><div slot='start'>Start</div>"
+	body.appendChild(item)
 }
-// Function to clear gallery
-function clear(target){
-	target = document.querySelector('#'+target)
-	target.innerHTML=""
-}
-
-// toggle helper function
-function toggle (a, b) {
-    var togg = false;
-    return function () {
-        return (togg = !togg) ? a() : b();
-    };
-};
-
-function checkCard(){
-	cards = document.querySelectorAll('.card')
-	for(i=0;i<cards.length;i++){
-		cards[i].onclick=function () {
-			colorCard(this)
-			submit(cards)
-		}
-	}
-}
-function blur(make_item, at_item){
-	target = document.querySelector(at_item)
-	body = document.querySelector('body')
-	y = target.clientHeight
-	item = document.createElement('div')
-	item.style.height = y+"px"
-	item.setAttribute('id',make_item)
-	body.prepend(item)
-}
-
-function colorCard(card) {
-	if(card.style.backgroundColor=="white"){
-		card.style.background="rgb(51,251,7)"
-		card.style.background="linear-gradient(61deg, rgba(51,251,7,1) 0%, rgba(5,180,23,1) 100%)"
-		card.style.backgroundColor="#F2F2F2"
-	}else {
-		card.style.background="rgb(86,197,249)"
-		card.style.background="linear-gradient(163deg, rgba(86,197,249,1) 0%, rgba(59,114,204,1) 100%)";
-		card.style.backgroundColor="white"
-	}
-}
-
-function submit(items){
-	cart = []
-	for (let item of items) {
-		event = item.querySelector('.event')
-		if(item.style.backgroundColor!="white"){
-			cart.push(event.textContent)
-	}
-	}
-	console.log(cart)
-	if(cart.length>0){
-		if (document.querySelector('#submit')==undefined){
-			buttonholder = document.createElement('div')
-			buttonholder.setAttribute('class','buttonholder')
-			buttonholder.setAttribute('id','submit')
-			button = document.createElement('div')
-			button.setAttribute('class','button')
-			button.innerHTML="Submit"
-			buttonholder.appendChild(button)
-			body.prepend(buttonholder)
-			blur('button_gutter','#submit')
-		}
-		submitbutton = document.querySelector('#submit')
-		submitbutton.onclick=function() {
-			notification = document.createElement('div')
-			notification.setAttribute('class','notification')
+function enter() {
+	start = document.querySelector('#start')
+	start.onclick=function() {
+		clear()
+		d3.csv('data.csv')
+		.then(function(data){
 			aligner = document.createElement('div')
 			aligner.setAttribute('class','aligner')
-			notification.appendChild(aligner)
-			results = cart.join(', ');
-			aligner.innerHTML="<svg class='checkmark' viewBox='0 0 52 52'><circle class='checkmark__circle' cx='26' cy='26' r='25' fill='none'/><path class='checkmark__check' fill='none' d='M14.1 27.2l7.1 7.2 16.7-16.8'/></svg>"
-			aligner.innerHTML+="<p> You're all signed up for "+results+"!</p>"
-			body.prepend(notification)
-		goback = document.createElement('div')
-		goback.setAttribute('class','button')
-		goback.innerHTML="Go back"
-		aligner.appendChild(goback)
-		goback.onclick=function(){
-			notification.style.display="none"
-		}
-
-		}
-	} else {
-		submitbutton = document.querySelector('.buttonholder')
-		button_gutter = document.querySelector('#button_gutter')
-		submitbutton.remove()
-		button_gutter.remove()
+			body.appendChild(aligner)
+			displayData('.aligner', data)
+		})
 	}
 }
 
+function clear() {
+	body.innerHTML=""
+}
 
+function displayData(location,data){
+target = document.querySelector(location)
+data.forEach(function(item){
+	title = item['event_name']
+	if(item['type']=='arts'){
+		src=4
+	} else if(item['type']=='culture'){
+		src=5
+	} else if (item['type']=='food'){
+		src=6
+	} else {
+		src=4
+	}
+	img = 'assets/'+src+'.png'
+	card = document.createElement('div')
+	card.setAttribute('class','event-card')
+	card.innerHTML+="<img src="+img+">"
+	card.innerHTML+="<h1>"+title+"</h1>"
+	target.appendChild(card)
+})
+}
+
+// elements
+customElements.define('start-screen', class extends HTMLElement {
+	constructor() {
+		super()
+		this.attachShadow({mode:'open'}).innerHTML=`
+		<style>
+		:host {
+			width:100%;
+			height:100vh;
+			display:flex;
+			background-color:#bfeffc;
+			justify-items:center;
+			align-items:center;
+			background-image:url(assets/4.png), url(assets/6.png);
+  			background-position:left top, bottom right;
+  			background-repeat: no-repeat;
+  			background-size: auto 30vh;
+		}
+		.aligner{
+			max-width:80%;
+			margin:auto;
+			text-align:center;
+		}
+		::slotted(img){
+			width:80%;
+		}
+		::slotted(h1) {
+			font-size:5em;
+		}
+		</style>
+		<slot></slot>
+		<div class='aligner'>
+		<slot name='message'><h1 slot='message'></h1></slot>
+		</div
+		`
+	}
+})
 
 </script>
+
 
 </html>
