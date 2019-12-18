@@ -70,14 +70,14 @@ d3.csv('data.csv')
 function tileView(data){
 	data.forEach(function(item){
 		name = item['event_name']
-		results.innerHTML += "<event-tile><h1 slot='event-name'>"+ name + "</h1></event-card>"
+		results.innerHTML += "<event-tile><h1 slot='event-name'>"+ name + "</h1></event-tile>"
 	})
 }
 
 function listView(data){
 	data.forEach(function(item){
 		name = item['event_name']
-		results.innerHTML += "<event-list><h1 slot='event-name'>"+ name + "</h1></event-card>"
+		results.innerHTML += "<event-list><h1 slot='event-name'>"+ name + "</h1></event-list>"
 	})
 }
 
